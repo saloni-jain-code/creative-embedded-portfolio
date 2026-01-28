@@ -19,12 +19,20 @@ export default function Portfolio() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0a0e0d] flex flex-col">
+    <div className="min-h-screen bg-black flex flex-col relative overflow-hidden">
+      {/* Scanline effect */}
+      <div className="fixed inset-0 pointer-events-none z-50 opacity-10">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-cyan-500/5 to-transparent animate-scanline"></div>
+      </div>
+      
       <Header currentView={currentView} setCurrentView={setCurrentView} />
 
-      <main className="max-w-6xl mx-auto px-6 py-16 flex-grow">{currentView === 'projects' && (
+      <main className="max-w-6xl mx-auto px-6 py-16 flex-grow relative z-10">
+        {currentView === 'projects' && (
           <div className="animate-fadeIn">
-            <h2 className="text-4xl font-bold text-[#52b788] mb-10 font-mono tracking-tight">&lt;Projects /&gt;</h2>
+            <h2 className="text-4xl font-bold mb-10 font-mono tracking-tight">
+              <span className="text-fuchsia-500">&lt;</span> <span className="text-cyan-400">Projects</span> <span className="text-fuchsia-500"> /&gt;</span>
+            </h2>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {projects.map(project => (
@@ -38,9 +46,11 @@ export default function Portfolio() {
               {/* {[...Array(Math.max(0, 5 - projects.length))].map((_, idx) => (
                 <div 
                   key={`placeholder-${idx}`}
-                  className="bg-[#1b4332]/20 rounded-lg overflow-hidden border-2 border-dashed border-[#2d6a4f] flex items-center justify-center aspect-[4/3]"
+                  className="bg-black/40 rounded-lg overflow-hidden border-2 border-dashed border-cyan-500/30 flex items-center justify-center aspect-[4/3]"
                 >
-                  <p className="text-[#52b788] font-mono text-sm">// Coming Soon</p>
+                  <p className="text-cyan-400 font-mono text-sm">
+                    <span className="text-yellow-400">//</span> Coming Soon
+                  </p>
                 </div>
               ))} */}
             </div>
@@ -62,14 +72,25 @@ export default function Portfolio() {
         
         body {
           font-family: 'JetBrains Mono', monospace;
+          background: #000;
         }
         
         @keyframes fadeIn {
           from { opacity: 0; transform: translateY(20px); }
           to { opacity: 1; transform: translateY(0); }
         }
+        
+        @keyframes scanline {
+          0% { transform: translateY(-100%); }
+          100% { transform: translateY(100%); }
+        }
+        
         .animate-fadeIn {
           animation: fadeIn 0.5s ease-out;
+        }
+        
+        .animate-scanline {
+          animation: scanline 8s linear infinite;
         }
       `}</style>
     </div>
