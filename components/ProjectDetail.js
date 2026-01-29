@@ -25,27 +25,28 @@ export default function ProjectDetail({ project, onBack }) {
           className="w-full h-auto opacity-90"
         />
       </div>
-      
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-        {project.detailImages.map((img, idx) => (
-          <div key={idx} className="rounded-lg overflow-hidden shadow-md shadow-cyan-500/20 border border-cyan-500/30">
-            <img 
-              src={img} 
-              alt={`${project.title} detail ${idx + 1}`}
-              className="w-full h-auto opacity-90"
-            />
-          </div>
-        ))}
-      </div>
-      
-      <div className="bg-black/40 rounded-lg p-8 border border-cyan-500/30">
+
+      <div className="bg-black/40 rounded-lg p-8 border border-cyan-500/30 mb-8">
         <h2 className="text-2xl font-semibold text-yellow-400 mb-4 font-mono">
-          <span className="text-fuchsia-500">function</span> reflection()
+          <span className="text-fuchsia-500"></span> reflection()
         </h2>
         <p className="text-green-400 leading-relaxed text-base font-mono">
           {project.reflection}
         </p>
       </div>
+      
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+        {project.detailImages.map((img, idx) => (
+          <div key={idx} className="rounded-lg overflow-hidden shadow-md shadow-cyan-500/20 border border-cyan-500/30 aspect-square">
+            <img 
+              src={img} 
+              alt={`${project.title} detail ${idx + 1}`}
+              className="w-full h-auto object-cover opacity-90"
+            />
+          </div>
+        ))}
+      </div>
+      
     </div>
   );
 }

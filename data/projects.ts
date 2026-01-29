@@ -11,13 +11,14 @@ export const projects: Project[] = [
   {
     id: 'project-1',
     title: 'Soldering Sculpture',
-    shortDescription: 'Small sculpture made by soldering 12 pins and a bent brass rod on a protoboard.',
-    heroImage: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&h=600&fit=crop',
+    shortDescription: 'Small sculpture made by soldering header pins and a bent brass rod in the shape of my initials (SJ) on a protoboard.',
+    heroImage: '/soldering_sculpture/hero.jpg',
     detailImages: [
-      'https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?w=600&h=400&fit=crop',
-      'https://images.unsplash.com/photo-1558346490-a72e53ae2d4f?w=600&h=400&fit=crop'
+      '/soldering_sculpture/diagonal.jpg',
+      '/soldering_sculpture/shadow.jpg',
+      '/soldering_sculpture/front_white.jpg',
+      '/soldering_sculpture/bottom_view.jpg'
     ],
-    reflection: 'REFLECTION HERE'
+    reflection: 'My soldering experience mostly stems from my AOE class freshman year and a bit from robotics club. I didn\'t know the proper technique of heating the pad first, adding solder to wrap around, then heating a bit more. As a result, my first set of header pins were quite messy. After learning the technique, the next set looked much better. I bent the brass rod into my initials (SJ) with some loops to make it more aesthetically pleasing, but you can see from the jagged bends that I tried other shapes first. The imperfections in both the soldering and bending embody my perseverance and efforts to reach my end goal. Overall, this piece shows my journey more so than it does some end result.'
   },
-  // Add more projects here
 ];
