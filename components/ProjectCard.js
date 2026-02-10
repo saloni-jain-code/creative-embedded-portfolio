@@ -1,6 +1,8 @@
 import { ChevronRight } from 'lucide-react';
 
 export default function ProjectCard({ project, onClick }) {
+  const isVideo = project.heroImage.endsWith('.mp4') || project.heroImage.endsWith('.mov') || project.heroImage.endsWith('.webm');
+  
   return (
     <div 
       onClick={onClick}
@@ -16,11 +18,25 @@ export default function ProjectCard({ project, onClick }) {
       }}
     >
       <div className="aspect-video overflow-hidden bg-black">
-        <img 
-          src={project.heroImage} 
-          alt={project.title}
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80 group-hover:opacity-90"
-        />
+        {project.heroImage !== "" && (
+          isVideo ? (
+            <video 
+              src={project.heroImage}
+              alt={project.title}
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80 group-hover:opacity-90"
+              autoPlay
+              loop
+              muted
+              playsInline
+            />
+          ) : (
+            <img 
+              src={project.heroImage} 
+              alt={project.title}
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80 group-hover:opacity-90"
+            />
+          )
+        )}
       </div>
       <div className="p-6">
         <h3 

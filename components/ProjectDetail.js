@@ -1,6 +1,8 @@
 import { ChevronRight } from 'lucide-react';
 
 export default function ProjectDetail({ project, onBack }) {
+  const isVideo = project.heroImage.endsWith('.mp4') || project.heroImage.endsWith('.mov') || project.heroImage.endsWith('.webm');
+
   return (
     <div className="animate-fadeIn">
       <button 
@@ -18,12 +20,26 @@ export default function ProjectDetail({ project, onBack }) {
         <span className="text-yellow-400"></span> {project.shortDescription}
       </p>
       
-      <div className="rounded-lg overflow-hidden shadow-lg shadow-cyan-500/20 mb-8 border border-cyan-500/30">
-        <img 
-          src={project.heroImage} 
-          alt={project.title}
-          className="w-full h-auto opacity-90"
-        />
+      <div className="rounded-lg overflow-hidden shadow-lg shadow-cyan-500/20 mb-8 border border-cyan-500/30 max-w-2xl mx-auto">
+        {project.heroImage !== "" && (
+          isVideo ? (
+            <video 
+              src={project.heroImage}
+              alt={project.title}
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80 group-hover:opacity-90"
+              autoPlay
+              loop
+              muted
+              playsInline
+            />
+          ) : (
+            <img 
+              src={project.heroImage} 
+              alt={project.title}
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80 group-hover:opacity-90"
+            />
+          )
+        )}
       </div>
 
       <div className="bg-black/40 rounded-lg p-8 border border-cyan-500/30 mb-8">
