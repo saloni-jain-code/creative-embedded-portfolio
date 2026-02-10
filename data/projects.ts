@@ -21,4 +21,13 @@ export const projects: Project[] = [
     ],
     reflection: 'My soldering experience mostly stems from my AOE class freshman year and a bit from robotics club. I didn\'t know the proper technique of heating the pad first, adding solder to wrap around, then heating a bit more. As a result, my first set of header pins were quite messy. After learning the technique, the next set looked much better. I bent the brass rod into my initials (SJ) with some loops to make it more aesthetically pleasing, but you can see from the jagged bends that I tried other shapes first. The imperfections in both the soldering and bending embody my perseverance and efforts to reach my end goal. Overall, this piece shows my journey more so than it does some end result.'
   },
+  {
+    id: 'project-2',
+    title: 'Blinking ESP32',
+    shortDescription: 'I tested my ESP32 by writing some simple code to flash it white every half second.',
+    heroImage: '/blinking_esp32/blinking.mov',
+    detailImages: [
+    ],
+    reflection: ''
+  },
 ];
