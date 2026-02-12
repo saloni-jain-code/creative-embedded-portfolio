@@ -1,4 +1,4 @@
-import { ChevronRight } from 'lucide-react';
+import { ChevronRight, Github } from 'lucide-react';
 
 export default function ProjectCard({ project, onClick }) {
   const isVideo = project.heroImage.endsWith('.mp4') || project.heroImage.endsWith('.mov') || project.heroImage.endsWith('.webm');
@@ -6,7 +6,7 @@ export default function ProjectCard({ project, onClick }) {
   return (
     <div 
       onClick={onClick}
-      className="group cursor-pointer bg-black/40 rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-cyan-500/30 hover:border-cyan-400"
+      className="group cursor-pointer bg-black/40 rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-cyan-500/30 hover:border-cyan-400 flex flex-col"
       style={{
         transition: 'all 0.3s ease',
       }}
@@ -38,7 +38,7 @@ export default function ProjectCard({ project, onClick }) {
           )
         )}
       </div>
-      <div className="p-6">
+      <div className="p-6 flex flex-col flex-1">
         <h3 
           className="text-xl font-semibold text-cyan-400 mb-2 transition-all font-mono"
           style={{
@@ -58,10 +58,22 @@ export default function ProjectCard({ project, onClick }) {
         <p className="text-green-400 text-sm leading-relaxed font-mono">
           {project.shortDescription}
         </p>
-        <div className="mt-4">
-          <div className="inline-flex items-center text-yellow-400 text-sm font-medium font-mono border border-yellow-400 px-3 py-1.5 rounded group-hover:bg-yellow-400 group-hover:text-black transition-all duration-300">
+        <div className="mt-auto pt-4 flex items-center gap-3">
+          <div className="inline-flex items-center text-yellow-400 text-sm font-medium font-mono border border-yellow-400 px-3 py-1.5 rounded hover:bg-yellow-400 hover:text-black transition-all duration-300">
             view_project() <ChevronRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
           </div>
+          {project.githubUrl && (
+            <a
+            href={project.githubUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={(e) => e.stopPropagation()}
+            className="inline-flex items-center text-fuchsia-500 text-sm font-mono border border-fuchsia-500 px-3 py-1.5 rounded hover:bg-fuchsia-500 hover:text-black transition-all duration-300"
+            >
+            <Github className="w-4 h-4" />
+          </a>
+          )
+        }
         </div>
       </div>
     </div>

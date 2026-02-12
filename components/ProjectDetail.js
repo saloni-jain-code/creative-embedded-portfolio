@@ -1,18 +1,29 @@
-import { ChevronRight } from 'lucide-react';
+import { ChevronRight, Github } from 'lucide-react';
 
 export default function ProjectDetail({ project, onBack }) {
   const isVideo = project.heroImage.endsWith('.mp4') || project.heroImage.endsWith('.mov') || project.heroImage.endsWith('.webm');
 
   return (
     <div className="animate-fadeIn">
-      <button 
-        onClick={onBack}
-        className="mb-8 inline-flex items-center text-fuchsia-500 font-mono border border-fuchsia-500 px-3 py-1.5 rounded hover:bg-fuchsia-500 hover:text-black transition-all duration-300"
-      >
-        <ChevronRight className="w-5 h-5 rotate-180 mr-2" />
-        back()
-      </button>
-      
+      <div className="flex items-center gap-3 mb-8">
+        <button 
+          onClick={onBack}
+          className="inline-flex items-center text-fuchsia-500 font-mono border border-fuchsia-500 px-3 py-1.5 rounded hover:bg-fuchsia-500 hover:text-black transition-all duration-300"
+        >
+          <ChevronRight className="w-5 h-5 rotate-180 mr-2" />
+          back()
+        </button>
+        {project.githubUrl && (
+          <a
+            href={project.githubUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 text-fuchsia-500 font-mono border border-fuchsia-500 px-3 py-1.5 rounded hover:bg-fuchsia-500 hover:text-black transition-all duration-300"
+          >
+            <Github className="w-4 h-4" /> github
+          </a>
+        )}
+      </div>
       <h1 className="text-4xl font-bold text-cyan-400 mb-4 font-mono">
         <span className="text-fuchsia-500">&gt;</span> {project.title}
       </h1>
@@ -44,22 +55,36 @@ export default function ProjectDetail({ project, onBack }) {
 
       {project.reflection != "" && 
       <div className="bg-black/40 rounded-lg p-8 border border-cyan-500/30 mb-8">
-        <h2 className="text-2xl font-semibold text-yellow-400 mb-4 font-mono">
-          <span className="text-fuchsia-500"></span> reflection()
-        </h2>
-        <p className="text-green-400 leading-relaxed text-base font-mono">
-          {project.reflection}
-        </p>
-      </div>
+      <h2 className="text-2xl font-semibold text-yellow-400 mb-4 font-mono">
+        <span className="text-fuchsia-500">def</span> describe()
+      </h2>
+        {project.reflection.split('\n\n').map((paragraph, idx) => (
+          <p key={idx} className="text-green-400 leading-relaxed text-base font-mono mb-4 last:mb-0">
+            {paragraph.trim()}
+          </p>
+      ))}
+    </div>
       }
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
         {project.detailImages.map((img, idx) => (
           <div key={idx} className="rounded-lg overflow-hidden shadow-md shadow-cyan-500/20 border border-cyan-500/30 aspect-square">
-            <img 
+            {img.endsWith('.mov') ?  
+            <video 
+              src={img}
+              alt={project.title}
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80 group-hover:opacity-90"
+              autoPlay
+              loop
+              muted
+              playsInline
+            />
+            : (<img 
               src={img} 
               alt={`${project.title} detail ${idx + 1}`}
               className="w-full h-auto object-cover opacity-90"
-            />
+            />)
+            }
+            
           </div>
         ))}
       </div>
