@@ -1,7 +1,7 @@
 import { ChevronRight, Github } from 'lucide-react';
 
 export default function ProjectDetail({ project, onBack }) {
-  const isVideo = project.heroImage.endsWith('.mp4') || project.heroImage.endsWith('.mov') || project.heroImage.endsWith('.webm');
+  const heroImages = Array.isArray(project.heroImage) ? project.heroImage : [project.heroImage];
 
   return (
     <div className="animate-fadeIn">
@@ -31,26 +31,23 @@ export default function ProjectDetail({ project, onBack }) {
         <span className="text-yellow-400"></span> {project.shortDescription}
       </p>
       
-      <div className="rounded-lg overflow-hidden shadow-lg shadow-cyan-500/20 mb-8 border border-cyan-500/30 max-w-2xl mx-auto">
-        {project.heroImage !== "" && (
-          isVideo ? (
-            <video 
-              src={project.heroImage}
-              alt={project.title}
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80 group-hover:opacity-90"
-              autoPlay
-              loop
-              muted
-              playsInline
-            />
-          ) : (
-            <img 
-              src={project.heroImage} 
-              alt={project.title}
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80 group-hover:opacity-90"
-            />
-          )
-        )}
+      <div className={`grid gap-4 mb-8 ${heroImages.length > 1 ? 'grid-cols-2' : 'grid-cols-1 max-w-2xl mx-auto'}`}>
+        {heroImages.map((src, idx) => {
+          const isVid = src.endsWith('.mp4') || src.endsWith('.mov') || src.endsWith('.webm');
+          return (
+            <div key={idx} className="rounded-lg overflow-hidden shadow-lg shadow-cyan-500/20 border border-cyan-500/30">
+              {isVid ? (
+                <video
+                  src={src}
+                  className="w-full h-full object-cover opacity-80"
+                  autoPlay loop muted playsInline
+                />
+              ) : (
+                <img src={src} alt={`${project.title} hero ${idx + 1}`} className="w-full h-full object-cover opacity-80" />
+              )}
+            </div>
+          );
+        })}
       </div>
 
       {project.reflection != "" && 

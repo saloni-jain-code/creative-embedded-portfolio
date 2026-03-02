@@ -1,7 +1,9 @@
 import { ChevronRight, Github } from 'lucide-react';
 
 export default function ProjectCard({ project, onClick }) {
-  const isVideo = project.heroImage.endsWith('.mp4') || project.heroImage.endsWith('.mov') || project.heroImage.endsWith('.webm');
+  const rawHero = Array.isArray(project.heroImage) ? project.heroImage[0] : project.heroImage;
+  const isVideo = rawHero.endsWith('.mp4') || rawHero.endsWith('.mov') || rawHero.endsWith('.webm');
+
   
   return (
     <div 
@@ -18,10 +20,10 @@ export default function ProjectCard({ project, onClick }) {
       }}
     >
       <div className="aspect-video overflow-hidden bg-black">
-        {project.heroImage !== "" && (
+        {rawHero !== "" && (
           isVideo ? (
             <video 
-              src={project.heroImage}
+              src={rawHero}
               alt={project.title}
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80 group-hover:opacity-90"
               autoPlay
@@ -31,7 +33,7 @@ export default function ProjectCard({ project, onClick }) {
             />
           ) : (
             <img 
-              src={project.heroImage} 
+              src={rawHero} 
               alt={project.title}
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80 group-hover:opacity-90"
             />
